@@ -1,1 +1,28 @@
-<?php //Test ?>
+<?php
+
+session_start();
+
+if (isset($_SESSION["perso_selected"])) {
+    echo "<meta http-equiv='refresh' content='0; url=./battleground.php'>";
+}
+
+?>
+
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Selection/Creation</title>
+    </head>
+    <body>
+        <form action="select_create_validate.php" method="post">
+            <h1>Selectionner ou créer un peronnage</h1>
+            <p>
+                <label for="name">Nom</label>
+                <input type="text" id="name" name="name" maxlength="100" placeholder="robot1234" />
+            </p>
+            <p>
+                <input type="submit" id="submit_button" name="submit_button" value="Valider" />
+            </p>
+        </form>
+    </body>
+</html>
