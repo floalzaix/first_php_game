@@ -6,7 +6,7 @@ USE first_php_game;
 
 CREATE TABLE personnages (
     id INT AUTO_INCREMENT,
-    nom VARCHAR(50),
+    name VARCHAR(50),
     deg SMALLINT,
     pv SMALLINT,
     PRIMARY KEY (id)

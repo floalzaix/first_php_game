@@ -1,13 +1,3 @@
-<?php
-
-session_start();
-
-if (isset($_SESSION["perso_selected"])) {
-    echo "<meta http-equiv='refresh' content='0; url=./battleground.php'>";
-}
-
-?>
-
 <html lang="fr">
     <head>
         <meta charset="UTF-8" />
