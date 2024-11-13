@@ -1,5 +1,6 @@
 <?php
 
+require_once("bdd_manager.php");
 class Personnage {
     protected $id;
     protected $name;
@@ -11,12 +12,15 @@ class Personnage {
         $this->deg = 0;
         $this->pv = 100;
     }
-    function takeHit($deg) {
+    function takeHit($deg, BddManager $bdd_manager) {
         $this->pv-= $deg;
         $this->deg+= mt_rant(3, 10);
+        if($this->pv <= 0) {
+            $bdd_manager->delPersonnage($this->name);
+        }
     }
-    function hit($target) : void {
-        $target->takeHit($this->deg);
+    function hit($target, BddManager $bdd_manager) : void {
+        $target->takeHit($this->deg, $bdd_manager);
     }
 
     //Getters setters

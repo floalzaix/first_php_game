@@ -13,10 +13,11 @@ class BddManager {
         $query = $this->pdo->prepare($sql);
         $query->execute(["name" => $name]);
         if ($query->rowCount() == 1) {
-            $personnage = new Personnage($query[0]["name"]);
-            $personnage->setId($query[0]["id"]);
-            $personnage->setDeg($query[0]["deg"]);
-            $personnage->setPv(($query[0]["pv"]));
+            $row = $query->fetch(PDO::FETCH_ASSOC);
+            $personnage = new Personnage($row["name"]);
+            $personnage->setId($row["id"]);
+            $personnage->setDeg($row["deg"]);
+            $personnage->setPv(($row["pv"]));
             return $personnage;
         } else if($query->rowCount() > 1) {
             echo "Erreur plus d'un robot enregistré dans la bdd avec le même nom";
@@ -26,10 +27,39 @@ class BddManager {
         }
     }
 
+    function getAllPersonnages() : array {
+        $sql = "SELECT * FROM personnages";
+        $query = $this->pdo->prepare($sql);
+        $query->execute();
+        $personnages = [];
+        $names = [];
+        foreach ($query as $row) {
+            $personnage = new Personnage($row["name"]);
+            $names[] = $row["name"];
+            $personnage->setId($row["id"]);
+            $personnage->setDeg($row["deg"]);
+            $personnage->setPv(($row["pv"]));
+            $personnages[] = $personnage;
+        }
+        return [$personnages, $names];
+    }
+
     function savePersonnage(Personnage $personnage) : void {
         $sql = "INSERT INTO personnages(name, deg, pv) VALUE (:nom, :deg, :pv)";
         $query = $this->pdo->prepare($sql);
         $query->execute(["nom" => $personnage->getName(), "deg" => $personnage->getDeg(), "pv" => $personnage->getPv()]);
+    }
+
+    function delPersonnage(Personnage $name) : ?bool {
+        $perso = $this->getPersonnage($name);
+        if (!isset($perso)) {
+            return false;
+        } else {
+            $sql = "DELETE FROM personnages WHERE name = :name";
+            $query = $this->pdo->prepare($sql);
+            $query->execute(["name" => $name]);
+        }
+        return true;
     }
 }
 
