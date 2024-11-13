@@ -22,7 +22,7 @@ $personnages = $bdd_manager->getAllPersonnages();
     <body>
         <h1>Vous etes au champs de bataille !</h1>
         <form action="battleground.php" method="post">
-            <h5>Vous avez choisi : <?php echo "<h6> Nom : ".$_SESSION['perso_selected']->getName()."<br/>"."Dégâts : ".$_SESSION["perso_selected"]->getDeg()."</h6>"; ?></h5>
+            <h5>Vous avez choisi : <?php echo "<h6> Nom : ".$_SESSION['perso_selected']->getName()."<br/>"."Dégâts : ".$_SESSION["perso_selected"]->getDeg()."<br/> PV : ".$_SESSION["perso_selected"]->getPV()."</h6>"; ?></h5>
             <h3>Veuillez choisir votre cible</h3>
             <p>
                 <select id="list_target" name="list_taget">
@@ -54,9 +54,8 @@ $personnages = $bdd_manager->getAllPersonnages();
         $target = $bdd_manager->getPersonnage($_POST["list_taget"]);
         if (isset($target)) {
             $_SESSION["perso_selected"]->hit($target, $bdd_manager);
-            echo "test";
         } else {
-            echo "Cible non valide";
+            echo "<br/>Cible non valide";
         }
         $personnages = $bdd_manager->getAllPersonnages();
     }
