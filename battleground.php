@@ -50,11 +50,14 @@ $personnages = $bdd_manager->getAllPersonnages();
 </html>
 
 <?php
-
-if ($_SERVER["REQUEST_METHOD"] == "post") {
     if (isset($_POST["submit_button"])) {
-
+        $target = $bdd_manager->getPersonnage($_POST["list_taget"]);
+        if (isset($target)) {
+            $_SESSION["perso_selected"]->hit($target, $bdd_manager);
+            echo "test";
+        } else {
+            echo "Cible non valide";
+        }
+        $personnages = $bdd_manager->getAllPersonnages();
     }
-}
-
 ?>

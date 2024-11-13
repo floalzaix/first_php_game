@@ -45,7 +45,12 @@ class BddManager {
     }
 
     function savePersonnage(Personnage $personnage) : void {
-        $sql = "INSERT INTO personnages(name, deg, pv) VALUE (:nom, :deg, :pv)";
+        $present = $this->getPersonnage($personnage->getName());
+        if (isset($present)) {
+            $sql = "UPDATE personnages SET pv = :pv, deg = :deg WHERE name = :nom";
+        } else {
+            $sql = "INSERT INTO personnages(name, deg, pv) VALUE (:nom, :deg, :pv)";
+        }
         $query = $this->pdo->prepare($sql);
         $query->execute(["nom" => $personnage->getName(), "deg" => $personnage->getDeg(), "pv" => $personnage->getPv()]);
     }

@@ -14,10 +14,11 @@ class Personnage {
     }
     function takeHit($deg, BddManager $bdd_manager) {
         $this->pv-= $deg;
-        $this->deg+= mt_rant(3, 10);
+        $this->deg+= mt_rand(3, 10);
         if($this->pv <= 0) {
             $bdd_manager->delPersonnage($this->name);
         }
+        $bdd_manager->savePersonnage($this);
     }
     function hit($target, BddManager $bdd_manager) : void {
         $target->takeHit($this->deg, $bdd_manager);
