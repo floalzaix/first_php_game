@@ -6,7 +6,7 @@ require_once("personnage.php");
 session_start();
 
 if (!isset($_SESSION["perso_selected"])) {
-    echo "<meta http-equiv='refresh' content='0; url=index.php' />";
+    echo "<meta http-equiv='refresh' content='0; url=index.html' />";
 }
 
 $bdd_manager = new BDDManager();
@@ -43,7 +43,7 @@ $personnages = $bdd_manager->getAllPersonnages();
                 <input type="submit" id="submit_button" name="submit_button" value="Attaquer" />
             </p>
         </form>
-        <a href="index.php">
+        <a href="index.html">
             <button type="button">Changer de personnage</button>
         </a>
     </body>
