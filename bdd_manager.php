@@ -5,7 +5,7 @@ class BddManager {
     private $pdo;
 
     function __construct() {
-        $this->pdo = new PDO("mysql:host=localhost; dbname=first_php_game", "flooooo", "0");
+        $this->pdo = new PDO("mysql:host=localhost; dbname=first_php_game", "root", "");
     }
 
     function getPersonnage($name) : ?Personnage {
