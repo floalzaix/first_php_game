@@ -5,7 +5,7 @@ class BddManager {
     private $pdo;
 
     function __construct() {
-        $this->pdo = new PDO("mysql:host=localhost; dbname=first_php_game", "flooooo", "0");
+        $this->pdo = new PDO("pgsql:host=dpg-csqqnm68ii6s73ev00lg-a.frankfurt-postgres.render.com; dbname=first_php_game", "admin", "VPy19JvUSdjBauZeUU7Eoe3DmnnozC3D");
     }
 
     function getPersonnage($name) : ?Personnage {
@@ -49,7 +49,7 @@ class BddManager {
         if (isset($present)) {
             $sql = "UPDATE personnages SET pv = :pv, deg = :deg WHERE name = :nom";
         } else {
-            $sql = "INSERT INTO personnages(name, deg, pv) VALUE (:nom, :deg, :pv)";
+            $sql = "INSERT INTO personnages(name, deg, pv) VALUES (:nom, :deg, :pv)";
         }
         $query = $this->pdo->prepare($sql);
         $query->execute(["nom" => $personnage->getName(), "deg" => $personnage->getDeg(), "pv" => $personnage->getPv()]);
