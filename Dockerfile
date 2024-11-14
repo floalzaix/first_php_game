@@ -1,7 +1,7 @@
-FROM alpine:3.10
+FROM php:8.2-apache
 
 # Copies your code file from your action repository to the filesystem path `/` of the container
-COPY index.html /index.html
+COPY . /var/www/html
 
-# Code file to execute when the docker container starts up (`entrypoint.sh`)
-ENTRYPOINT ["/index.html"]
+
+EXPOSE 80
