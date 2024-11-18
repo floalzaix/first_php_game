@@ -55,7 +55,7 @@ class BddManager {
         $query->execute(["nom" => $personnage->getName(), "deg" => $personnage->getDeg(), "pv" => $personnage->getPv()]);
     }
 
-    function delPersonnage(Personnage $name) : ?bool {
+    function delPersonnage(string $name) : ?bool {
         $perso = $this->getPersonnage($name);
         if (!isset($perso)) {
             return false;
