@@ -5,7 +5,7 @@ class BddManager {
     private $pdo;
 
     function __construct() {
-        $this->pdo = new PDO("mysql:host=localhost; dbname=first_php_game", "root", "");
+        $this->pdo = new PDO("mysql:host=localhost; dbname=first_php_game", "flooooo", "0");
     }
 
     function getPersonnage($name) : ?Personnage {
@@ -55,7 +55,7 @@ class BddManager {
         $query->execute(["nom" => $personnage->getName(), "deg" => $personnage->getDeg(), "pv" => $personnage->getPv()]);
     }
 
-    function delPersonnage(Personnage $name) : ?bool {
+    function delPersonnage(string $name) : ?bool {
         $perso = $this->getPersonnage($name);
         if (!isset($perso)) {
             return false;
@@ -63,8 +63,8 @@ class BddManager {
             $sql = "DELETE FROM personnages WHERE name = :name";
             $query = $this->pdo->prepare($sql);
             $query->execute(["name" => $name]);
+            return true;
         }
-        return true;
     }
 }
 

@@ -17,8 +17,9 @@ class Personnage {
         $this->deg+= mt_rand(3, 10);
         if($this->pv <= 0) {
             $bdd_manager->delPersonnage($this->name);
+        } else {
+            $bdd_manager->savePersonnage($this);
         }
-        $bdd_manager->savePersonnage($this);
     }
     function hit($target, BddManager $bdd_manager) : void {
         $target->takeHit($this->deg, $bdd_manager);
