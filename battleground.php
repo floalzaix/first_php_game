@@ -14,6 +14,18 @@ $personnages = $bdd_manager->getAllPersonnages();
 
 ?>
 
+<?php
+if (isset($_POST["submit_button"])) {
+    $target = $bdd_manager->getPersonnage($_POST["list_taget"]);
+    if (isset($target)) {
+        $_SESSION["perso_selected"]->hit($target, $bdd_manager);
+    } else {
+        echo "<br/>Cible non valide";
+    }
+    $personnages = $bdd_manager->getAllPersonnages();
+}
+?>
+
 <html lang="fr">
     <head>
         <meta charset="UTF-8" />
@@ -48,15 +60,3 @@ $personnages = $bdd_manager->getAllPersonnages();
         </a>
     </body>
 </html>
-
-<?php
-    if (isset($_POST["submit_button"])) {
-        $target = $bdd_manager->getPersonnage($_POST["list_taget"]);
-        if (isset($target)) {
-            $_SESSION["perso_selected"]->hit($target, $bdd_manager);
-        } else {
-            echo "<br/>Cible non valide";
-        }
-        $personnages = $bdd_manager->getAllPersonnages();
-    }
-?>
